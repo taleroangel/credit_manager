@@ -1,0 +1,64 @@
+{
+	"app": {
+		"title": "Credit Manager",
+		"accept": "Ok",
+		"cancel": "Cancel",
+		"add": "Add",
+		"edit": "Edit",
+		"erase": "Erase",
+		"update": "Update"
+	},
+	"financial": {
+		"fee": "Fee",
+		"due": "Due day",
+		"loan": "Loan",
+		"interest": "Interest (%)",
+		"term": "Installments"
+	},
+	"models": {
+		"credit_card": {
+			"name": "Card name",
+			"fee_type": [
+				"None",
+				"Fixed monthly",
+				"Montly when used"
+			]
+		}
+	},
+	"navigation": {
+		"cards": {
+			"appbar_title": "Your Credit Cards",
+			"bottom_item": "Cards"
+		},
+		"credit": {
+			"appbar_title": "Credit Simulator",
+			"bottom_item": "Credit"
+		},
+		"settings": {
+			"appbar_title": "Settings",
+			"bottom_item": "Settings"
+		}
+	},
+	"screens": {
+		"card_edit": {
+			"page_title": "Add a card",
+			"error_due_day": "Select a day between 1 and 31",
+			"error_card_name": "You must name your card",
+			"info_card_name": "You will not be able to edit the name later",
+			"color_picker_title": "Pick a color",
+			"color_pick": "Color",
+			"icon_pick": "Icon",
+			"icon_picker_title": "Pick an icon"
+		},
+		"card_details": {
+			"page_title": "Card Details",
+			"delete_confirmation": "Are you sure you want to delete $cardName ?",
+			"next_payment": "Next payment: $payment",
+			"no_payment": "No pending payments",
+			"no_credits": "Looks like you haven't added any credits yet"
+		},
+		"cards": {
+			"no_cards": "Looks like you haven't added any cards yet"
+		}
+	}
+}
