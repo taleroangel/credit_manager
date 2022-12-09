@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 1
-/// Strings: 36
+/// Strings: 47
 ///
-/// Built on 2022-12-09 at 05:19 UTC
+/// Built on 2022-12-09 at 21:15 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -168,6 +168,9 @@ class _StringsAppEn {
 	String get edit => 'Edit';
 	String get erase => 'Erase';
 	String get update => 'Update';
+	String get invalid => 'This value is not valid';
+	String get required => 'This field is required';
+	String get optional => '(Optional)';
 }
 
 // Path: financial
@@ -180,8 +183,9 @@ class _StringsFinancialEn {
 	String get fee => 'Fee';
 	String get due => 'Due day';
 	String get loan => 'Loan';
-	String get interest => 'Interest (%)';
+	String get interest => 'Interest (% M.A)';
 	String get term => 'Installments';
+	String get others => 'Other expenses';
 }
 
 // Path: models
@@ -191,6 +195,8 @@ class _StringsModelsEn {
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
+	late final _StringsModelsCreditEn credit = _StringsModelsCreditEn._(_root);
+	late final _StringsModelsPaymentEn payment = _StringsModelsPaymentEn._(_root);
 	late final _StringsModelsCreditCardEn credit_card = _StringsModelsCreditCardEn._(_root);
 }
 
@@ -216,6 +222,27 @@ class _StringsScreensEn {
 	late final _StringsScreensCardEditEn card_edit = _StringsScreensCardEditEn._(_root);
 	late final _StringsScreensCardDetailsEn card_details = _StringsScreensCardDetailsEn._(_root);
 	late final _StringsScreensCardsEn cards = _StringsScreensCardsEn._(_root);
+	late final _StringsScreensCreditScreenEn credit_screen = _StringsScreensCreditScreenEn._(_root);
+}
+
+// Path: models.credit
+class _StringsModelsCreditEn {
+	_StringsModelsCreditEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get name => 'Credit name';
+}
+
+// Path: models.payment
+class _StringsModelsPaymentEn {
+	_StringsModelsPaymentEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String installment({required Object number}) => 'Installment #${number}';
 }
 
 // Path: models.credit_card
@@ -307,6 +334,20 @@ class _StringsScreensCardsEn {
 	String get no_cards => 'Looks like you haven\'t added any cards yet';
 }
 
+// Path: screens.credit_screen
+class _StringsScreensCreditScreenEn {
+	_StringsScreensCreditScreenEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get calculate => 'Calculate';
+	String get credit_summary => 'Credit Summary';
+	String get total => 'Total: ';
+	String get max_installment => 'Maximum installment: ';
+	String get store_on_credit_card => 'Store in credit card';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -320,11 +361,17 @@ extension on _StringsEn {
 			case 'app.edit': return 'Edit';
 			case 'app.erase': return 'Erase';
 			case 'app.update': return 'Update';
+			case 'app.invalid': return 'This value is not valid';
+			case 'app.required': return 'This field is required';
+			case 'app.optional': return '(Optional)';
 			case 'financial.fee': return 'Fee';
 			case 'financial.due': return 'Due day';
 			case 'financial.loan': return 'Loan';
-			case 'financial.interest': return 'Interest (%)';
+			case 'financial.interest': return 'Interest (% M.A)';
 			case 'financial.term': return 'Installments';
+			case 'financial.others': return 'Other expenses';
+			case 'models.credit.name': return 'Credit name';
+			case 'models.payment.installment': return ({required Object number}) => 'Installment #${number}';
 			case 'models.credit_card.name': return 'Card name';
 			case 'models.credit_card.fee_type.0': return 'None';
 			case 'models.credit_card.fee_type.1': return 'Fixed monthly';
@@ -349,6 +396,11 @@ extension on _StringsEn {
 			case 'screens.card_details.no_payment': return 'No pending payments';
 			case 'screens.card_details.no_credits': return 'Looks like you haven\'t added any credits yet';
 			case 'screens.cards.no_cards': return 'Looks like you haven\'t added any cards yet';
+			case 'screens.credit_screen.calculate': return 'Calculate';
+			case 'screens.credit_screen.credit_summary': return 'Credit Summary';
+			case 'screens.credit_screen.total': return 'Total: ';
+			case 'screens.credit_screen.max_installment': return 'Maximum installment: ';
+			case 'screens.credit_screen.store_on_credit_card': return 'Store in credit card';
 			default: return null;
 		}
 	}

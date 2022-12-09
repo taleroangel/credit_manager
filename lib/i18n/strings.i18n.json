@@ -6,16 +6,26 @@
 		"add": "Add",
 		"edit": "Edit",
 		"erase": "Erase",
-		"update": "Update"
+		"update": "Update",
+		"invalid": "This value is not valid",
+		"required": "This field is required",
+		"optional": "(Optional)"
 	},
 	"financial": {
 		"fee": "Fee",
 		"due": "Due day",
 		"loan": "Loan",
-		"interest": "Interest (%)",
-		"term": "Installments"
+		"interest": "Interest (% M.A)",
+		"term": "Installments",
+		"others": "Other expenses"
 	},
 	"models": {
+		"credit": {
+			"name": "Credit name"
+		},
+		"payment": {
+			"installment": "Installment #$number"
+		},
 		"credit_card": {
 			"name": "Card name",
 			"fee_type": [
@@ -59,6 +69,13 @@
 		},
 		"cards": {
 			"no_cards": "Looks like you haven't added any cards yet"
+		},
+		"credit_screen": {
+			"calculate": "Calculate",
+			"credit_summary": "Credit Summary",
+			"total": "Total: ",
+			"max_installment": "Maximum installment: ",
+			"store_on_credit_card": "Store in credit card"
 		}
 	}
 }

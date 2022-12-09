@@ -1,4 +1,4 @@
-package com.example.credit_manager
+package com.taleroangel.credit_manager
 
 import io.flutter.embedding.android.FlutterActivity
 

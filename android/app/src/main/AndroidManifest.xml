@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.credit_manager">
+    package="com.taleroangel.credit_manager">
    <application
         android:label="credit_manager"
         android:name="${applicationName}"

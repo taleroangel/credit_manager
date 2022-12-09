@@ -89,7 +89,7 @@ class _$ApplicationDatabase extends ApplicationDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `CreditCard` (`name` TEXT NOT NULL, `color` INTEGER NOT NULL, `icon` INTEGER, `fee` REAL NOT NULL, `feeType` INTEGER NOT NULL, `due` INTEGER, PRIMARY KEY (`name`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Credit` (`name` TEXT NOT NULL, `card` TEXT, `loan` REAL NOT NULL, `interest` REAL NOT NULL, `term` INTEGER NOT NULL, PRIMARY KEY (`name`))');
+            'CREATE TABLE IF NOT EXISTS `Credit` (`name` TEXT NOT NULL, `card` TEXT, `loan` TEXT NOT NULL, `interest` TEXT NOT NULL, `installments` INTEGER NOT NULL, `payments` TEXT NOT NULL, PRIMARY KEY (`name`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -190,7 +190,7 @@ class _$CreditCardDao extends CreditCardDao {
   Future<List<Credit?>> cardCredits(String name) async {
     return _queryAdapter.queryList(
         'SELECT * FROM CreditCard p INNER JOIN Credit c ON c.card = p.name WHERE p.name = ?1',
-        mapper: (Map<String, Object?> row) => Credit(name: row['name'] as String, card: row['card'] as String?, loan: row['loan'] as double, interest: row['interest'] as double, term: row['term'] as int),
+        mapper: (Map<String, Object?> row) => Credit(name: row['name'] as String, card: row['card'] as String?, loan: _decimalConverter.decode(row['loan'] as String), interest: _decimalConverter.decode(row['interest'] as String), installments: row['installments'] as int, payments: _paymentListConverter.decode(row['payments'] as String)),
         arguments: [name]);
   }
 
@@ -222,9 +222,10 @@ class _$CreditDao extends CreditDao {
             (Credit item) => <String, Object?>{
                   'name': item.name,
                   'card': item.card,
-                  'loan': item.loan,
-                  'interest': item.interest,
-                  'term': item.term
+                  'loan': _decimalConverter.encode(item.loan),
+                  'interest': _decimalConverter.encode(item.interest),
+                  'installments': item.installments,
+                  'payments': _paymentListConverter.encode(item.payments)
                 }),
         _creditUpdateAdapter = UpdateAdapter(
             database,
@@ -233,9 +234,10 @@ class _$CreditDao extends CreditDao {
             (Credit item) => <String, Object?>{
                   'name': item.name,
                   'card': item.card,
-                  'loan': item.loan,
-                  'interest': item.interest,
-                  'term': item.term
+                  'loan': _decimalConverter.encode(item.loan),
+                  'interest': _decimalConverter.encode(item.interest),
+                  'installments': item.installments,
+                  'payments': _paymentListConverter.encode(item.payments)
                 }),
         _creditDeletionAdapter = DeletionAdapter(
             database,
@@ -244,9 +246,10 @@ class _$CreditDao extends CreditDao {
             (Credit item) => <String, Object?>{
                   'name': item.name,
                   'card': item.card,
-                  'loan': item.loan,
-                  'interest': item.interest,
-                  'term': item.term
+                  'loan': _decimalConverter.encode(item.loan),
+                  'interest': _decimalConverter.encode(item.interest),
+                  'installments': item.installments,
+                  'payments': _paymentListConverter.encode(item.payments)
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -267,9 +270,10 @@ class _$CreditDao extends CreditDao {
         mapper: (Map<String, Object?> row) => Credit(
             name: row['name'] as String,
             card: row['card'] as String?,
-            loan: row['loan'] as double,
-            interest: row['interest'] as double,
-            term: row['term'] as int));
+            loan: _decimalConverter.decode(row['loan'] as String),
+            interest: _decimalConverter.decode(row['interest'] as String),
+            installments: row['installments'] as int,
+            payments: _paymentListConverter.decode(row['payments'] as String)));
   }
 
   @override
@@ -278,9 +282,10 @@ class _$CreditDao extends CreditDao {
         mapper: (Map<String, Object?> row) => Credit(
             name: row['name'] as String,
             card: row['card'] as String?,
-            loan: row['loan'] as double,
-            interest: row['interest'] as double,
-            term: row['term'] as int),
+            loan: _decimalConverter.decode(row['loan'] as String),
+            interest: _decimalConverter.decode(row['interest'] as String),
+            installments: row['installments'] as int,
+            payments: _paymentListConverter.decode(row['payments'] as String)),
         arguments: [name]);
   }
 
@@ -305,3 +310,5 @@ final _dateTimeConverter = DateTimeConverter();
 final _iconDataConverter = IconDataConverter();
 final _colorConverter = ColorConverter();
 final _feeTypeConverter = FeeTypeConverter();
+final _paymentListConverter = PaymentListConverter();
+final _decimalConverter = DecimalConverter();

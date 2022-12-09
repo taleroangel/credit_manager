@@ -83,6 +83,8 @@ class MainView extends StatefulWidget {
   State<MainView> createState() => _MainViewState();
 }
 
+//TODO: Enable Settings
+
 class _MainViewState extends State<MainView> {
   int _currentIndex = 0;
   final PageController pageController = PageController();
@@ -124,7 +126,7 @@ class _MainViewState extends State<MainView> {
             SliverAppBar.large(
               title: Text(appBarTitle),
               centerTitle: true,
-            )
+            ),
           ],
           body: PageView(
               controller: pageController,
@@ -134,7 +136,7 @@ class _MainViewState extends State<MainView> {
               children: const [
                 CardsScreen(),
                 CreditScreen(),
-                SettingsScreen()
+                //SettingsScreen()
               ]),
         ),
 
@@ -153,9 +155,9 @@ class _MainViewState extends State<MainView> {
             NavigationDestination(
                 icon: const Icon(Icons.attach_money),
                 label: t.navigation.credit.bottom_item),
-            NavigationDestination(
-                icon: const Icon(Icons.settings),
-                label: t.navigation.settings.bottom_item),
+            // NavigationDestination(
+            //     icon: const Icon(Icons.settings),
+            //     label: t.navigation.settings.bottom_item),
           ],
         ));
   }

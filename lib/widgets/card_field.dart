@@ -47,11 +47,12 @@ class _CardFieldState extends State<CardField> {
                 //* Card name input
                 TextFormField(
                   enabled: widget.enablePrimaryKey,
+                  readOnly: !widget.enablePrimaryKey,
                   initialValue: card.name,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       labelText: t.models.credit_card.name),
-                  validator: (value) => nameValidator(t, value),
+                  validator: nameValidator,
                   onChanged: (value) => setState(() {
                     card.name = value;
                   }),
@@ -177,7 +178,7 @@ class _CardFieldState extends State<CardField> {
                     initialValue: card.due?.toString() ?? "",
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    validator: (value) => validateDueDay(t, value),
+                    validator: validateDueDay,
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         labelText: t.financial.due),
@@ -190,14 +191,14 @@ class _CardFieldState extends State<CardField> {
     );
   }
 
-  String? nameValidator(t, String? value) {
+  String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return t.screens.card_edit.error_card_name;
     }
     return null;
   }
 
-  String? validateDueDay(t, String? value) {
+  String? validateDueDay(String? value) {
     int day;
     try {
       day = int.parse(value!);
