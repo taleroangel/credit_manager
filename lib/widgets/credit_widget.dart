@@ -14,7 +14,7 @@ class CreditWidget extends StatelessWidget {
       title: Text(credit.name),
       subtitle: Text(FinancialTool.formatCurrency(context, credit.loan)),
       trailing: Text.rich(TextSpan(children: [
-        TextSpan(text: "${t.financial.interest}: ${credit.interest}%\n"),
+        TextSpan(text: "${t.financial.interest_ma}: ${credit.interest}%\n"),
         TextSpan(text: "${t.financial.term}: ${credit.installments}")
       ])),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(

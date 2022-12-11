@@ -23,9 +23,11 @@
 		"fee": "Fee",
 		"due": "Due day",
 		"loan": "Loan",
-		"interest": "Interest (% M.A)",
+		"interest_loss": "Interest loss",
+		"interest_ma": "Interest (% M.A)",
 		"term": "Installments",
-		"others": "Other expenses"
+		"others": "Other expenses",
+		"credit": "Crédito"
 	},
 	"models": {
 		"credit": {
@@ -72,6 +74,7 @@
 			"page_title": "Card Details",
 			"delete_confirmation": "Are you sure you want to delete $cardName ?",
 			"next_payment": "Next payment: $payment",
+			"total_debt": "Total debt: $debt",
 			"no_payment": "No pending payments",
 			"no_credits": "Looks like you haven't added any credits yet",
 			"your_credits": "Your credits: "
@@ -85,7 +88,8 @@
 			"total": "Total: ",
 			"max_installment": "Maximum installment: ",
 			"store_on_credit_card": "Store in credit card",
-			"select_card": "Select a card..."
+			"select_card": "Select a card...",
+			"initial_date": "Pick initial due"
 		},
 		"credit_detail": {
 			"page_title": "Credit Detail"

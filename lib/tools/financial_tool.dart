@@ -1,3 +1,4 @@
+import 'package:credit_manager/models/credit.dart';
 import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/models/payment.dart';
 import 'package:decimal/decimal.dart';
@@ -9,7 +10,8 @@ class FinancialTool {
       {required Decimal debt,
       required int installments,
       required Decimal interest,
-      Decimal? others}) {
+      Decimal? others,
+      DateTime? initial}) {
     // Required variables
     interest = (interest / Decimal.fromInt(100))
         .toDecimal(scaleOnInfinitePrecision: 5);
@@ -31,7 +33,7 @@ class FinancialTool {
           total: (baseInstallment + installment + (others ?? Decimal.zero))));
     }
 
-    return payments;
+    return generatePaymentsDues(payments, initial);
   }
 
   static String formatCurrency(BuildContext context, dynamic value) {
@@ -43,16 +45,47 @@ class FinancialTool {
 
   static PaymentList updatePayments(
       PaymentList payments, CreditCard creditCard) {
-    if (creditCard.due == null) {
-      return payments.map((e) => e.copyWith(due: null)).toList();
-    }
+    final dayDue = creditCard.due ?? 1;
     // Calculate datetime
-    final now = DateTime.now();
     int monthOffset = 0;
     return payments
         .map((e) => e.copyWith(
-            due: DateTime(
-                now.year, now.month + (monthOffset++), creditCard.due!)))
+            due: DateTime(e.due!.year, e.due!.month + (monthOffset++), dayDue)))
         .toList();
+  }
+
+  static PaymentList generatePaymentsDues(PaymentList payments,
+      [DateTime? initial]) {
+    final now = initial ?? DateTime.now();
+    int monthOffset = 0;
+    return payments
+        .map((e) => e.copyWith(
+            due: DateTime(now.year, now.month + (monthOffset++), now.day)))
+        .toList();
+  }
+
+  static Decimal totalDebt(List<Credit?> credits) {
+    if (credits.isEmpty) return Decimal.zero;
+    Decimal totalDebt = Decimal.zero;
+    for (var element in credits) {
+      totalDebt += element!.loan;
+    }
+    return totalDebt;
+  }
+
+  static Decimal monthInstallments(List<Credit?> credits) {
+    final now = DateTime.now();
+    Decimal total = Decimal.zero;
+    for (var credit in credits) {
+      try {
+        total += credit!.payments
+            .where((element) =>
+                (element.due!.month == now.month) &&
+                (element.due!.year == now.year))
+            .map((e) => e.total)
+            .reduce((value, element) => (value + element));
+      } catch (_) {}
+    }
+    return total;
   }
 }

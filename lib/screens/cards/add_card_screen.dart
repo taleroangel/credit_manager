@@ -1,8 +1,8 @@
 import 'package:credit_manager/i18n/strings.g.dart';
 import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
-import 'package:credit_manager/screens/dialogs/error_dialog.dart';
-import 'package:credit_manager/screens/dialogs/success_dialog.dart';
+import 'package:credit_manager/widgets/dialogs/error_dialog.dart';
+import 'package:credit_manager/widgets/dialogs/success_dialog.dart';
 import 'package:credit_manager/widgets/card_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

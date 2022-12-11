@@ -4,8 +4,8 @@ import 'package:credit_manager/models/credit.dart';
 import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
 import 'package:credit_manager/providers/credit_provider.dart';
-import 'package:credit_manager/screens/dialogs/error_dialog.dart';
-import 'package:credit_manager/screens/dialogs/success_dialog.dart';
+import 'package:credit_manager/widgets/dialogs/error_dialog.dart';
+import 'package:credit_manager/widgets/dialogs/success_dialog.dart';
 import 'package:credit_manager/tools/financial_tool.dart';
 import 'package:credit_manager/widgets/credit_installments_widget.dart';
 import 'package:decimal/decimal.dart';
@@ -31,6 +31,7 @@ class _CreditScreenState extends State<CreditScreen> {
   // Credit
   Credit? credit;
   Iterable<double>? creditValues;
+  double? totalPay;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class _CreditScreenState extends State<CreditScreen> {
             ],
             decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                labelText: t.financial.interest)),
+                labelText: t.financial.interest_ma)),
         const SizedBox(height: 16.0),
         TextFormField(
             validator: requiredField,
@@ -108,6 +109,8 @@ class _CreditScreenState extends State<CreditScreen> {
                   installments: installments,
                   payments: payments);
               creditValues = credit!.payments.map((e) => e.total.toDouble());
+              totalPay =
+                  creditValues!.reduce((value, element) => (value + element));
             });
           },
         ),
@@ -135,9 +138,21 @@ class _CreditScreenState extends State<CreditScreen> {
                             TextSpan(
                                 //* Calculate MAX Payment
                                 text: FinancialTool.formatCurrency(
-                                    context,
-                                    creditValues!.reduce(
-                                        (value, element) => (value + element))))
+                                    context, totalPay))
+                          ]),
+                      // Show interest loss
+                      TextSpan(
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Theme.of(context).colorScheme.error),
+                          children: [
+                            TextSpan(
+                                text: '\n${t.financial.interest_loss}: ',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500)),
+                            TextSpan(
+                                text: FinancialTool.formatCurrency(context,
+                                    (totalPay! - credit!.loan.toDouble())))
                           ]),
                       // Show maximum
                       TextSpan(children: [
@@ -193,7 +208,8 @@ class _SaveCredit extends StatefulWidget {
 class _SaveCreditState extends State<_SaveCredit> {
   final _formKey = GlobalKey<FormState>();
   final _creditNameController = TextEditingController();
-  CreditCard? creditCard;
+  CreditCard? _creditCard;
+  DateTime? _initialDateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +242,7 @@ class _SaveCreditState extends State<_SaveCredit> {
                     } else {
                       return DropdownButtonFormField(
                         onChanged: (value) {
-                          creditCard = value;
+                          _creditCard = value;
                         },
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
@@ -245,6 +261,19 @@ class _SaveCreditState extends State<_SaveCredit> {
                     child: CircularProgressIndicator(),
                   );
                 },
+              ),
+              const SizedBox(height: 8.0),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.calendar_month),
+                label: Text(t.screens.credit.initial_date),
+                onPressed: () async {
+                  _initialDateTime = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 1826)),
+                      lastDate: DateTime.now().add(const Duration(days: 1826)));
+                },
               )
             ],
           )),
@@ -257,9 +286,10 @@ class _SaveCreditState extends State<_SaveCredit> {
               if (_formKey.currentState!.validate()) {
                 // Update credit values with credit card
                 widget.credit.name = _creditNameController.value.text;
-                widget.credit.payments = FinancialTool.updatePayments(
-                    widget.credit.payments, creditCard!);
-                widget.credit.card = creditCard!.name;
+                widget.credit.payments = FinancialTool.generatePaymentsDues(
+                    widget.credit.payments, _initialDateTime);
+
+                widget.credit.card = _creditCard!.name;
                 // InsertCredit
                 context
                     .read<CreditProvider>()

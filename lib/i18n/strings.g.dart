@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 1
-/// Strings: 56
+/// Strings: 60
 ///
-/// Built on 2022-12-11 at 02:00 UTC
+/// Built on 2022-12-11 at 05:28 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -199,9 +199,11 @@ class _StringsFinancialEn {
 	String get fee => 'Fee';
 	String get due => 'Due day';
 	String get loan => 'Loan';
-	String get interest => 'Interest (% M.A)';
+	String get interest_loss => 'Interest loss';
+	String get interest_ma => 'Interest (% M.A)';
 	String get term => 'Installments';
 	String get others => 'Other expenses';
+	String get credit => 'Crédito';
 }
 
 // Path: models
@@ -337,6 +339,7 @@ class _StringsScreensCardDetailsEn {
 	String get page_title => 'Card Details';
 	String delete_confirmation({required Object cardName}) => 'Are you sure you want to delete ${cardName} ?';
 	String next_payment({required Object payment}) => 'Next payment: ${payment}';
+	String total_debt({required Object debt}) => 'Total debt: ${debt}';
 	String get no_payment => 'No pending payments';
 	String get no_credits => 'Looks like you haven\'t added any credits yet';
 	String get your_credits => 'Your credits: ';
@@ -365,6 +368,7 @@ class _StringsScreensCreditEn {
 	String get max_installment => 'Maximum installment: ';
 	String get store_on_credit_card => 'Store in credit card';
 	String get select_card => 'Select a card...';
+	String get initial_date => 'Pick initial due';
 }
 
 // Path: screens.credit_detail
@@ -402,9 +406,11 @@ extension on _StringsEn {
 			case 'financial.fee': return 'Fee';
 			case 'financial.due': return 'Due day';
 			case 'financial.loan': return 'Loan';
-			case 'financial.interest': return 'Interest (% M.A)';
+			case 'financial.interest_loss': return 'Interest loss';
+			case 'financial.interest_ma': return 'Interest (% M.A)';
 			case 'financial.term': return 'Installments';
 			case 'financial.others': return 'Other expenses';
+			case 'financial.credit': return 'Crédito';
 			case 'models.credit.name': return 'Credit name';
 			case 'models.payment.installment': return ({required Object number}) => 'Installment #${number}';
 			case 'models.credit_card.name': return 'Card name';
@@ -428,6 +434,7 @@ extension on _StringsEn {
 			case 'screens.card_details.page_title': return 'Card Details';
 			case 'screens.card_details.delete_confirmation': return ({required Object cardName}) => 'Are you sure you want to delete ${cardName} ?';
 			case 'screens.card_details.next_payment': return ({required Object payment}) => 'Next payment: ${payment}';
+			case 'screens.card_details.total_debt': return ({required Object debt}) => 'Total debt: ${debt}';
 			case 'screens.card_details.no_payment': return 'No pending payments';
 			case 'screens.card_details.no_credits': return 'Looks like you haven\'t added any credits yet';
 			case 'screens.card_details.your_credits': return 'Your credits: ';
@@ -438,6 +445,7 @@ extension on _StringsEn {
 			case 'screens.credit.max_installment': return 'Maximum installment: ';
 			case 'screens.credit.store_on_credit_card': return 'Store in credit card';
 			case 'screens.credit.select_card': return 'Select a card...';
+			case 'screens.credit.initial_date': return 'Pick initial due';
 			case 'screens.credit_detail.page_title': return 'Credit Detail';
 			default: return null;
 		}
