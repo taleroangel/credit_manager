@@ -141,9 +141,11 @@ class _MainViewState extends State<MainView> {
               onPageChanged: (value) => setState(() {
                     _currentIndex = value;
                   }),
-              children: const [
-                CardsScreen(),
-                CreditScreen(),
+              children: [
+                const CardsScreen(),
+                WillPopScope(
+                    onWillPop: _returnToHome, child: const CreditScreen())
+                //TODO Enable Settings Screens
                 //SettingsScreen()
               ]),
         ),
@@ -151,11 +153,7 @@ class _MainViewState extends State<MainView> {
         //* BottomNavigationBar to Routes
         bottomNavigationBar: NavigationBar(
           selectedIndex: _currentIndex,
-          onDestinationSelected: (value) => setState(() {
-            pageController.animateToPage(value,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
-          }),
+          onDestinationSelected: (value) => navigateToPage(value),
           destinations: [
             NavigationDestination(
                 icon: const Icon(Icons.credit_card),
@@ -168,5 +166,17 @@ class _MainViewState extends State<MainView> {
             //     label: t.navigation.settings.bottom_item),
           ],
         ));
+  }
+
+  Future<bool> _returnToHome() async {
+    navigateToPage(0);
+    return false;
+  }
+
+  navigateToPage(int index) {
+    setState(() {
+      pageController.animateToPage(index,
+          duration: const Duration(milliseconds: 300), curve: Curves.ease);
+    });
   }
 }

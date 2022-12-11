@@ -79,13 +79,16 @@
 		"cards": {
 			"no_cards": "Looks like you haven't added any cards yet"
 		},
-		"credit_screen": {
+		"credit": {
+			"page_title": "Credit Summary",
 			"calculate": "Calculate",
-			"credit_summary": "Credit Summary",
 			"total": "Total: ",
 			"max_installment": "Maximum installment: ",
 			"store_on_credit_card": "Store in credit card",
 			"select_card": "Select a card..."
+		},
+		"credit_detail": {
+			"page_title": "Credit Detail"
 		}
 	}
 }

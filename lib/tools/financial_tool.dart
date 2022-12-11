@@ -43,14 +43,16 @@ class FinancialTool {
 
   static PaymentList updatePayments(
       PaymentList payments, CreditCard creditCard) {
-    if (creditCard.due == null) return payments;
-
+    if (creditCard.due == null) {
+      return payments.map((e) => e.copyWith(due: null)).toList();
+    }
     // Calculate datetime
     final now = DateTime.now();
     int monthOffset = 0;
-    payments.map((e) => e.copyWith(
-        due: DateTime(now.year, now.month + (monthOffset++), creditCard.due!)));
-
-    return payments;
+    return payments
+        .map((e) => e.copyWith(
+            due: DateTime(
+                now.year, now.month + (monthOffset++), creditCard.due!)))
+        .toList();
   }
 }

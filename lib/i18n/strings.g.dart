@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 1
-/// Strings: 55
+/// Strings: 56
 ///
-/// Built on 2022-12-11 at 01:05 UTC
+/// Built on 2022-12-11 at 02:00 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -238,7 +238,8 @@ class _StringsScreensEn {
 	late final _StringsScreensCardEditEn card_edit = _StringsScreensCardEditEn._(_root);
 	late final _StringsScreensCardDetailsEn card_details = _StringsScreensCardDetailsEn._(_root);
 	late final _StringsScreensCardsEn cards = _StringsScreensCardsEn._(_root);
-	late final _StringsScreensCreditScreenEn credit_screen = _StringsScreensCreditScreenEn._(_root);
+	late final _StringsScreensCreditEn credit = _StringsScreensCreditEn._(_root);
+	late final _StringsScreensCreditDetailEn credit_detail = _StringsScreensCreditDetailEn._(_root);
 }
 
 // Path: models.credit
@@ -351,19 +352,29 @@ class _StringsScreensCardsEn {
 	String get no_cards => 'Looks like you haven\'t added any cards yet';
 }
 
-// Path: screens.credit_screen
-class _StringsScreensCreditScreenEn {
-	_StringsScreensCreditScreenEn._(this._root);
+// Path: screens.credit
+class _StringsScreensCreditEn {
+	_StringsScreensCreditEn._(this._root);
 
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
+	String get page_title => 'Credit Summary';
 	String get calculate => 'Calculate';
-	String get credit_summary => 'Credit Summary';
 	String get total => 'Total: ';
 	String get max_installment => 'Maximum installment: ';
 	String get store_on_credit_card => 'Store in credit card';
 	String get select_card => 'Select a card...';
+}
+
+// Path: screens.credit_detail
+class _StringsScreensCreditDetailEn {
+	_StringsScreensCreditDetailEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get page_title => 'Credit Detail';
 }
 
 /// Flat map(s) containing all translations.
@@ -421,12 +432,13 @@ extension on _StringsEn {
 			case 'screens.card_details.no_credits': return 'Looks like you haven\'t added any credits yet';
 			case 'screens.card_details.your_credits': return 'Your credits: ';
 			case 'screens.cards.no_cards': return 'Looks like you haven\'t added any cards yet';
-			case 'screens.credit_screen.calculate': return 'Calculate';
-			case 'screens.credit_screen.credit_summary': return 'Credit Summary';
-			case 'screens.credit_screen.total': return 'Total: ';
-			case 'screens.credit_screen.max_installment': return 'Maximum installment: ';
-			case 'screens.credit_screen.store_on_credit_card': return 'Store in credit card';
-			case 'screens.credit_screen.select_card': return 'Select a card...';
+			case 'screens.credit.page_title': return 'Credit Summary';
+			case 'screens.credit.calculate': return 'Calculate';
+			case 'screens.credit.total': return 'Total: ';
+			case 'screens.credit.max_installment': return 'Maximum installment: ';
+			case 'screens.credit.store_on_credit_card': return 'Store in credit card';
+			case 'screens.credit.select_card': return 'Select a card...';
+			case 'screens.credit_detail.page_title': return 'Credit Detail';
 			default: return null;
 		}
 	}

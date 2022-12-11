@@ -82,7 +82,7 @@ class _CreditScreenState extends State<CreditScreen> {
         const SizedBox(height: 16.0),
         ElevatedButton.icon(
           icon: const Icon(Icons.calculate),
-          label: Text(t.screens.credit_screen.calculate),
+          label: Text(t.screens.credit.calculate),
           onPressed: () {
             if (!_formKey.currentState!.validate()) {
               return;
@@ -111,12 +111,14 @@ class _CreditScreenState extends State<CreditScreen> {
             });
           },
         ),
+
+        //* Show credit information
         if (credit != null)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 32.0),
             child: Column(
               children: [
-                Text(t.screens.credit_screen.credit_summary),
+                Text(t.screens.credit.page_title),
                 const Divider(),
                 Text.rich(
                     TextSpan(children: [
@@ -127,7 +129,7 @@ class _CreditScreenState extends State<CreditScreen> {
                               color: Theme.of(context).colorScheme.primary),
                           children: [
                             TextSpan(
-                                text: t.screens.credit_screen.total,
+                                text: t.screens.credit.total,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w600)),
                             TextSpan(
@@ -141,8 +143,7 @@ class _CreditScreenState extends State<CreditScreen> {
                       TextSpan(children: [
                         TextSpan(
                             style: const TextStyle(fontWeight: FontWeight.bold),
-                            text:
-                                "\n${t.screens.credit_screen.max_installment}"),
+                            text: "\n${t.screens.credit.max_installment}"),
                         TextSpan(
                             text: FinancialTool.formatCurrency(
                                 context, creditValues!.reduce(max)))
@@ -157,10 +158,10 @@ class _CreditScreenState extends State<CreditScreen> {
                           context: context,
                           builder: (context) => _SaveCredit(credit: credit!)),
                       icon: const Icon(Icons.save),
-                      label:
-                          Text(t.screens.credit_screen.store_on_credit_card)),
+                      label: Text(t.screens.credit.store_on_credit_card)),
                 ),
                 const Divider(),
+                // Show installments
                 CreditInstallmentsWidget(credit: credit!)
               ],
             ),
@@ -198,7 +199,7 @@ class _SaveCreditState extends State<_SaveCredit> {
   Widget build(BuildContext context) {
     final cardProivder = context.read<CreditCardProvider>();
     return AlertDialog(
-      title: Text(t.screens.credit_screen.store_on_credit_card),
+      title: Text(t.screens.credit.store_on_credit_card),
       content: Form(
           key: _formKey,
           child: Column(
@@ -229,7 +230,7 @@ class _SaveCreditState extends State<_SaveCredit> {
                         },
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            hintText: t.screens.credit_screen.select_card),
+                            hintText: t.screens.credit.select_card),
                         items: snapshot.data!
                             .map((e) => DropdownMenuItem(
                                   value: e,

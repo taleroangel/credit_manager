@@ -10,7 +10,7 @@ class CreditProvider extends ChangeNotifier {
     _creditCardsDao = GetIt.instance.get<CreditDao>();
   }
 
-  Future<List<Credit>> get creditCards => _creditCardsDao.allCredits();
+  Future<List<Credit>> get credits => _creditCardsDao.allCredits();
 
   Future<void> insert(Credit credit) async {
     final result = await _creditCardsDao.insertCredit(credit);

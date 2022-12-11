@@ -60,39 +60,37 @@ class CardDetailScreen extends StatelessWidget {
               ],
             ),
             const Divider(),
-            Column(
-              children: [
-                //TODO: Calculate next payment
-                //* Show next payment
-                if (creditCard.due != null) const Divider(),
-                if (creditCard.due != null)
-                  Text(t.screens.card_details.next_payment(payment: "ATA")),
+            FutureBuilder(
+              future: cardsProvider.getCredits(creditCard),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.data != null && snapshot.data!.isNotEmpty) {
+                    return Column(children: [
+                      //TODO: Calculate next payment
+                      //* Show next payment
+                      if (creditCard.due != null)
+                        Text(t.screens.card_details
+                            .next_payment(payment: "ATA")),
 
-                //* Show Credits
-                const SizedBox(height: 16.0),
-                Text(t.screens.card_details.your_credits,
-                    style: Theme.of(context).textTheme.titleLarge),
-                FutureBuilder(
-                  future: cardsProvider.getCredits(creditCard),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.data != null && snapshot.data!.isNotEmpty) {
-                        return ListView.separated(
-                          shrinkWrap: true,
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: snapshot.data!.length,
-                          separatorBuilder: (_, __) => const Divider(),
-                          itemBuilder: (_, i) =>
-                              CreditWidget(credit: snapshot.data![i]!),
-                        );
-                      } else {
-                        return Text(t.screens.card_details.no_credits);
-                      }
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                ),
-              ],
+                      //* Show Credits
+                      const SizedBox(height: 16.0),
+                      Text(t.screens.card_details.your_credits,
+                          style: Theme.of(context).textTheme.titleLarge),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: snapshot.data!.length,
+                        separatorBuilder: (_, __) => const Divider(),
+                        itemBuilder: (_, i) =>
+                            CreditWidget(credit: snapshot.data![i]!),
+                      ),
+                    ]);
+                  } else {
+                    return Text(t.screens.card_details.no_credits);
+                  }
+                }
+                return const CircularProgressIndicator();
+              },
             )
           ],
         ),
