@@ -19,7 +19,6 @@ abstract class CreditCardDao {
   @delete
   Future<void> deleteCreditCard(CreditCard creditCard);
 
-  @Query(
-      'SELECT * FROM CreditCard p INNER JOIN Credit c ON c.card = p.name WHERE p.name = :name')
+  @Query('SELECT * FROM Credit WHERE card = :name')
   Future<List<Credit?>> cardCredits(String name);
 }

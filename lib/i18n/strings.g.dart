@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 1
-/// Strings: 47
+/// Strings: 55
 ///
-/// Built on 2022-12-09 at 21:15 UTC
+/// Built on 2022-12-11 at 01:05 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -148,6 +148,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 
 	// Translations
 	late final _StringsAppEn app = _StringsAppEn._(_root);
+	late final _StringsDialogsEn dialogs = _StringsDialogsEn._(_root);
 	late final _StringsFinancialEn financial = _StringsFinancialEn._(_root);
 	late final _StringsModelsEn models = _StringsModelsEn._(_root);
 	late final _StringsNavigationEn navigation = _StringsNavigationEn._(_root);
@@ -171,6 +172,21 @@ class _StringsAppEn {
 	String get invalid => 'This value is not valid';
 	String get required => 'This field is required';
 	String get optional => '(Optional)';
+	String get save => 'Save';
+}
+
+// Path: dialogs
+class _StringsDialogsEn {
+	_StringsDialogsEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get success_title => 'Successfull Operation';
+	String get success_subtitle => 'The insertion completed successfully';
+	String get error_title => 'An error ocurred';
+	String get error_subtitle => 'Error reported by database: ';
+	String get error_unspecified => 'No error information provided';
 }
 
 // Path: financial
@@ -322,6 +338,7 @@ class _StringsScreensCardDetailsEn {
 	String next_payment({required Object payment}) => 'Next payment: ${payment}';
 	String get no_payment => 'No pending payments';
 	String get no_credits => 'Looks like you haven\'t added any credits yet';
+	String get your_credits => 'Your credits: ';
 }
 
 // Path: screens.cards
@@ -346,6 +363,7 @@ class _StringsScreensCreditScreenEn {
 	String get total => 'Total: ';
 	String get max_installment => 'Maximum installment: ';
 	String get store_on_credit_card => 'Store in credit card';
+	String get select_card => 'Select a card...';
 }
 
 /// Flat map(s) containing all translations.
@@ -364,6 +382,12 @@ extension on _StringsEn {
 			case 'app.invalid': return 'This value is not valid';
 			case 'app.required': return 'This field is required';
 			case 'app.optional': return '(Optional)';
+			case 'app.save': return 'Save';
+			case 'dialogs.success_title': return 'Successfull Operation';
+			case 'dialogs.success_subtitle': return 'The insertion completed successfully';
+			case 'dialogs.error_title': return 'An error ocurred';
+			case 'dialogs.error_subtitle': return 'Error reported by database: ';
+			case 'dialogs.error_unspecified': return 'No error information provided';
 			case 'financial.fee': return 'Fee';
 			case 'financial.due': return 'Due day';
 			case 'financial.loan': return 'Loan';
@@ -395,12 +419,14 @@ extension on _StringsEn {
 			case 'screens.card_details.next_payment': return ({required Object payment}) => 'Next payment: ${payment}';
 			case 'screens.card_details.no_payment': return 'No pending payments';
 			case 'screens.card_details.no_credits': return 'Looks like you haven\'t added any credits yet';
+			case 'screens.card_details.your_credits': return 'Your credits: ';
 			case 'screens.cards.no_cards': return 'Looks like you haven\'t added any cards yet';
 			case 'screens.credit_screen.calculate': return 'Calculate';
 			case 'screens.credit_screen.credit_summary': return 'Credit Summary';
 			case 'screens.credit_screen.total': return 'Total: ';
 			case 'screens.credit_screen.max_installment': return 'Maximum installment: ';
 			case 'screens.credit_screen.store_on_credit_card': return 'Store in credit card';
+			case 'screens.credit_screen.select_card': return 'Select a card...';
 			default: return null;
 		}
 	}

@@ -9,7 +9,15 @@
 		"update": "Update",
 		"invalid": "This value is not valid",
 		"required": "This field is required",
-		"optional": "(Optional)"
+		"optional": "(Optional)",
+		"save": "Save"
+	},
+	"dialogs": {
+		"success_title": "Successfull Operation",
+		"success_subtitle": "The insertion completed successfully",
+		"error_title": "An error ocurred",
+		"error_subtitle": "Error reported by database: ",
+		"error_unspecified": "No error information provided"
 	},
 	"financial": {
 		"fee": "Fee",
@@ -65,7 +73,8 @@
 			"delete_confirmation": "Are you sure you want to delete $cardName ?",
 			"next_payment": "Next payment: $payment",
 			"no_payment": "No pending payments",
-			"no_credits": "Looks like you haven't added any credits yet"
+			"no_credits": "Looks like you haven't added any credits yet",
+			"your_credits": "Your credits: "
 		},
 		"cards": {
 			"no_cards": "Looks like you haven't added any cards yet"
@@ -75,7 +84,8 @@
 			"credit_summary": "Credit Summary",
 			"total": "Total: ",
 			"max_installment": "Maximum installment: ",
-			"store_on_credit_card": "Store in credit card"
+			"store_on_credit_card": "Store in credit card",
+			"select_card": "Select a card..."
 		}
 	}
 }

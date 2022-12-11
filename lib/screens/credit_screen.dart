@@ -3,6 +3,9 @@ import 'package:credit_manager/i18n/strings.g.dart';
 import 'package:credit_manager/models/credit.dart';
 import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
+import 'package:credit_manager/providers/credit_provider.dart';
+import 'package:credit_manager/screens/dialogs/error_dialog.dart';
+import 'package:credit_manager/screens/dialogs/success_dialog.dart';
 import 'package:credit_manager/tools/financial_tool.dart';
 import 'package:credit_manager/widgets/credit_installments_widget.dart';
 import 'package:decimal/decimal.dart';
@@ -179,7 +182,7 @@ class _CreditScreenState extends State<CreditScreen> {
 }
 
 class _SaveCredit extends StatefulWidget {
-  const _SaveCredit({super.key, required this.credit});
+  const _SaveCredit({required this.credit});
   final Credit credit;
 
   @override
@@ -187,7 +190,9 @@ class _SaveCredit extends StatefulWidget {
 }
 
 class _SaveCreditState extends State<_SaveCredit> {
-  bool canSave = false;
+  final _formKey = GlobalKey<FormState>();
+  final _creditNameController = TextEditingController();
+  CreditCard? creditCard;
 
   @override
   Widget build(BuildContext context) {
@@ -195,47 +200,85 @@ class _SaveCreditState extends State<_SaveCredit> {
     return AlertDialog(
       title: Text(t.screens.credit_screen.store_on_credit_card),
       content: Form(
+          key: _formKey,
           child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: t.models.credit.name),
-          ),
-          FutureBuilder(
-            future: cardProivder.creditCards,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.data!.isEmpty) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(t.screens.cards.no_cards),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: _creditNameController,
+                validator: (value) =>
+                    (value == null || value.isEmpty) ? t.app.required : null,
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: t.models.credit.name),
+              ),
+              const SizedBox(height: 16.0),
+              FutureBuilder(
+                future: cardProivder.creditCards,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.data!.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(t.screens.cards.no_cards),
+                      );
+                    } else {
+                      return DropdownButtonFormField(
+                        onChanged: (value) {
+                          creditCard = value;
+                        },
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: t.screens.credit_screen.select_card),
+                        items: snapshot.data!
+                            .map((e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(e.name),
+                                ))
+                            .toList(),
+                      );
+                    }
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: CircularProgressIndicator(),
                   );
-                } else {
-                  return DropdownButton(
-                    onChanged: null,
-                    items: snapshot.data!
-                        .map((e) => DropdownMenuItem(
-                              value: e.name,
-                              child: Text(e.name),
-                            ))
-                        .toList(),
-                  );
-                }
-              }
-              return const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
-              );
-            },
-          )
-        ],
-      )),
+                },
+              )
+            ],
+          )),
       actions: [
         ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text(t.app.cancel))
+            child: Text(t.app.cancel)),
+        ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                // Update credit values with credit card
+                widget.credit.name = _creditNameController.value.text;
+                widget.credit.payments = FinancialTool.updatePayments(
+                    widget.credit.payments, creditCard!);
+                widget.credit.card = creditCard!.name;
+                // InsertCredit
+                context
+                    .read<CreditProvider>()
+                    .insert(widget.credit)
+                    // Is insertion was successfull
+                    .then((value) => showDialog(
+                          context: context,
+                          builder: (_) => const SuccessDialog(),
+                        ).then((value) => Navigator.of(context)
+                            .popUntil(ModalRoute.withName('/'))))
+                    // If insertion failed
+                    .onError((error, stackTrace) => showDialog(
+                          context: context,
+                          builder: (context) => ErrorDialog(
+                            reason: error.toString(),
+                          ),
+                        ));
+              }
+            },
+            child: Text(t.app.save))
       ],
     );
   }

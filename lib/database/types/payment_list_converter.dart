@@ -8,5 +8,8 @@ class PaymentListConverter extends TypeConverter<PaymentList, String> {
   String encode(PaymentList value) => jsonEncode(value);
 
   @override
-  PaymentList decode(String databaseValue) => jsonDecode(databaseValue);
+  PaymentList decode(String databaseValue) =>
+      (jsonDecode(databaseValue) as List<dynamic>)
+          .map((e) => Payment.fromJson(e))
+          .toList();
 }

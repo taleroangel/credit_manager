@@ -1,3 +1,4 @@
+import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/models/payment.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,5 +39,18 @@ class FinancialTool {
     final currencySymbol =
         NumberFormat.simpleCurrency(locale: locale.toString()).currencySymbol;
     return "$currencySymbol ${value.toStringAsFixed(2)}";
+  }
+
+  static PaymentList updatePayments(
+      PaymentList payments, CreditCard creditCard) {
+    if (creditCard.due == null) return payments;
+
+    // Calculate datetime
+    final now = DateTime.now();
+    int monthOffset = 0;
+    payments.map((e) => e.copyWith(
+        due: DateTime(now.year, now.month + (monthOffset++), creditCard.due!)));
+
+    return payments;
   }
 }

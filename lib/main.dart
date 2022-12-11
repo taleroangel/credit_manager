@@ -1,7 +1,9 @@
 import 'package:credit_manager/database/application_database.dart';
 import 'package:credit_manager/database/credit_card_dao.dart';
+import 'package:credit_manager/database/credit_dao.dart';
 import 'package:credit_manager/i18n/strings.g.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
+import 'package:credit_manager/providers/credit_provider.dart';
 import 'package:credit_manager/screens/cards/add_card_screen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,9 @@ void main() {
       $FloorApplicationDatabase.databaseBuilder('credit_manager.db').build());
   GetIt.instance.registerSingletonWithDependencies<CreditCardDao>(
       () => GetIt.instance.get<ApplicationDatabase>().creditCardDao,
+      dependsOn: [ApplicationDatabase]);
+  GetIt.instance.registerSingletonWithDependencies<CreditDao>(
+      () => GetIt.instance.get<ApplicationDatabase>().creditDao,
       dependsOn: [ApplicationDatabase]);
   // Run application
   runApp(TranslationProvider(child: const Application()));
@@ -46,6 +51,9 @@ class Application extends StatelessWidget {
                     providers: [
                       ChangeNotifierProvider<CreditCardProvider>(
                         create: (_) => CreditCardProvider(),
+                      ),
+                      ChangeNotifierProvider<CreditProvider>(
+                        create: (_) => CreditProvider(),
                       )
                     ],
                     builder: (context, _) {

@@ -188,9 +188,14 @@ class _$CreditCardDao extends CreditCardDao {
 
   @override
   Future<List<Credit?>> cardCredits(String name) async {
-    return _queryAdapter.queryList(
-        'SELECT * FROM CreditCard p INNER JOIN Credit c ON c.card = p.name WHERE p.name = ?1',
-        mapper: (Map<String, Object?> row) => Credit(name: row['name'] as String, card: row['card'] as String?, loan: _decimalConverter.decode(row['loan'] as String), interest: _decimalConverter.decode(row['interest'] as String), installments: row['installments'] as int, payments: _paymentListConverter.decode(row['payments'] as String)),
+    return _queryAdapter.queryList('SELECT * FROM Credit WHERE card = ?1',
+        mapper: (Map<String, Object?> row) => Credit(
+            name: row['name'] as String,
+            card: row['card'] as String?,
+            loan: _decimalConverter.decode(row['loan'] as String),
+            interest: _decimalConverter.decode(row['interest'] as String),
+            installments: row['installments'] as int,
+            payments: _paymentListConverter.decode(row['payments'] as String)),
         arguments: [name]);
   }
 
