@@ -17,7 +17,7 @@ class Credit {
   Decimal loan;
   Decimal interest;
   int installments;
-  PaymentList payments;
+  List<Payment> payments;
 
   Credit(
       {this.name = "",

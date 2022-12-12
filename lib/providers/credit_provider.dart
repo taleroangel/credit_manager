@@ -13,21 +13,18 @@ class CreditProvider extends ChangeNotifier {
   Future<List<Credit>> get credits => _creditCardsDao.allCredits();
 
   Future<void> insert(Credit credit) async {
-    final result = await _creditCardsDao.insertCredit(credit);
+    await _creditCardsDao.insertCredit(credit);
     notifyListeners();
-    return result;
   }
 
   Future<void> delete(Credit credit) async {
-    final result = await _creditCardsDao.deleteCredit(credit);
+    await _creditCardsDao.deleteCredit(credit);
     notifyListeners();
-    return result;
   }
 
   Future<void> update(Credit credit) async {
-    final result = await _creditCardsDao.updateCredit(credit);
+    await _creditCardsDao.updateCredit(credit);
     notifyListeners();
-    return result;
   }
 
   Future<Credit?> getByName(String name) {

@@ -4,12 +4,12 @@ import 'package:credit_manager/database/credit_dao.dart';
 import 'package:credit_manager/i18n/strings.g.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
 import 'package:credit_manager/providers/credit_provider.dart';
-import 'package:credit_manager/screens/cards/add_card_screen.dart';
+import 'package:credit_manager/screens/card_screens/add_card_screen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:credit_manager/screens/cards_screen.dart';
 import 'package:credit_manager/screens/credit_screen.dart';
-import 'package:credit_manager/screens/settings_screen.dart';
+import 'package:credit_manager/screens/about_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_it/get_it.dart';
@@ -83,7 +83,7 @@ class Application extends StatelessWidget {
       );
 }
 
-/// Create the main view with bottom navigation bar with [CardsScreen], [CreditScreen] and [SettingsScreen]
+/// Create the main view with bottom navigation bar with [CardsScreen], [CreditScreen] and [AboutScreen]
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
@@ -114,7 +114,7 @@ class _MainViewState extends State<MainView> {
         appBarTitle = t.navigation.credit.appbar_title;
         break;
       case 2:
-        appBarTitle = t.navigation.settings.appbar_title;
+        appBarTitle = t.navigation.about.appbar_title;
         break;
     }
 
@@ -144,9 +144,9 @@ class _MainViewState extends State<MainView> {
               children: [
                 const CardsScreen(),
                 WillPopScope(
-                    onWillPop: _returnToHome, child: const CreditScreen())
-                //TODO Enable Settings Screens
-                //SettingsScreen()
+                    onWillPop: _returnToHome, child: const CreditScreen()),
+                WillPopScope(
+                    onWillPop: _returnToHome, child: const AboutScreen())
               ]),
         ),
 
@@ -161,9 +161,9 @@ class _MainViewState extends State<MainView> {
             NavigationDestination(
                 icon: const Icon(Icons.attach_money),
                 label: t.navigation.credit.bottom_item),
-            // NavigationDestination(
-            //     icon: const Icon(Icons.settings),
-            //     label: t.navigation.settings.bottom_item),
+            NavigationDestination(
+                icon: const Icon(Icons.info_rounded),
+                label: t.navigation.about.bottom_item),
           ],
         ));
   }

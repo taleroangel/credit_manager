@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:floor/floor.dart';
 import 'package:credit_manager/models/payment.dart';
 
-class PaymentListConverter extends TypeConverter<PaymentList, String> {
+class ListPaymentConverter extends TypeConverter<List<Payment>, String> {
   @override
-  String encode(PaymentList value) => jsonEncode(value);
+  String encode(List<Payment> value) => jsonEncode(value);
 
   @override
-  PaymentList decode(String databaseValue) =>
+  List<Payment> decode(String databaseValue) =>
       (jsonDecode(databaseValue) as List<dynamic>)
           .map((e) => Payment.fromJson(e))
           .toList();

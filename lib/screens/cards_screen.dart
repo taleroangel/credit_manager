@@ -1,6 +1,6 @@
 import 'package:credit_manager/i18n/strings.g.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
-import 'package:credit_manager/screens/cards/card_detail_screen.dart';
+import 'package:credit_manager/screens/card_screens/card_detail_screen.dart';
 import 'package:credit_manager/widgets/credit_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -6,36 +6,103 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class FinancialTool {
-  static PaymentList calculateCredit(
+  // Rational numbers like (10/3) infinite decimal precision scale
+  static const rationalInfinitePrecisionScale = 5;
+
+  /// Calculate a credit and return the corresponding [List<Payment>] (Installments)
+  static List<Payment> calculateCredit(
       {required Decimal debt,
       required int installments,
       required Decimal interest,
       Decimal? others,
       DateTime? initial}) {
-    // Required variables
-    interest = (interest / Decimal.fromInt(100))
-        .toDecimal(scaleOnInfinitePrecision: 5);
-    final baseInstallment = (debt / Decimal.fromInt(installments))
-        .toDecimal(scaleOnInfinitePrecision: 5);
-    final debts = List<Decimal>.filled(installments, Decimal.zero);
-    final payments = PaymentList.empty(growable: true);
+    // One only, no interest
+    if (installments == 1) {
+      return [Payment(debt: Decimal.zero, interest: Decimal.zero, total: debt)];
+    }
 
-    // Calculated payments
+    // Required variables
+    // Transform interest % into double
+    interest = (interest / Decimal.fromInt(100))
+        .toDecimal(scaleOnInfinitePrecision: rationalInfinitePrecisionScale);
+
+    // Calculate base installment (Fixed)
+    final baseInstallment = (debt / Decimal.fromInt(installments))
+        .toDecimal(scaleOnInfinitePrecision: rationalInfinitePrecisionScale);
+
+    // Array with debts
+    final debts = List<Decimal>.filled(installments, Decimal.zero);
+
+    // Array of payments
+    final payments = List<Payment>.empty(growable: true);
+
+    // For every installment
     for (int i = 0; i < installments; i++) {
-      // Calculate debt and interest
+      // Calculate base debt (Previous debt - base installment)
       debts[i] = (i == 0) ? debt : (debts[i - 1] - baseInstallment);
+      // Reduce debt by additional payment
       final installment = (debts[i] * interest);
+      var total = (baseInstallment + installment + (others ?? Decimal.zero));
+
+      if (total > (debts[i] + installment + (others ?? Decimal.zero))) {
+        total = (debts[i] + installment + (others ?? Decimal.zero));
+      }
+
       // Append payment
       payments.add(Payment(
-          debt: debts[i],
-          interest: installment,
-          others: others,
-          total: (baseInstallment + installment + (others ?? Decimal.zero))));
+          debt: debts[i], interest: installment, others: others, total: total));
     }
 
     return generatePaymentsDues(payments, initial);
   }
 
+  static List<Payment> recalculateCredit(Credit credit) {
+    // Copy credits
+    final originalPayments = [...credit.payments];
+
+    // Calculate base installment
+    final baseInstallment = (credit.loan / Decimal.fromInt(credit.installments))
+        .toDecimal(scaleOnInfinitePrecision: rationalInfinitePrecisionScale);
+
+    // Calculate interest in M.A%
+    final interest = (credit.interest / Decimal.fromInt(100))
+        .toDecimal(scaleOnInfinitePrecision: rationalInfinitePrecisionScale);
+
+    // Array with debts
+    final debts = List<Decimal>.filled(credit.installments, Decimal.zero);
+
+    // Array of payments
+    final payments = List<Payment>.empty(growable: true);
+
+    // For each payment
+    for (int i = 0; i < credit.installments; i++) {
+      // Calculate base debt (Previous debt - base installment)
+      debts[i] = (i == 0) ? credit.loan : (debts[i - 1] - baseInstallment);
+      // Reduce debt by additional payment
+      debts[i] -= originalPayments[i].deposit ?? Decimal.zero;
+
+      // Calculate installment
+      final installment = (debts[i] * interest);
+      final others = credit.payments[i].others;
+      var total = (baseInstallment +
+          installment +
+          (originalPayments[i].others ?? Decimal.zero));
+      if (total > (debts[i] + installment + (others ?? Decimal.zero))) {
+        total = (debts[i] + installment + (others ?? Decimal.zero));
+      }
+      // Append payment
+      payments.add(originalPayments[i].copyWith(
+          debt: debts[i],
+          interest: installment,
+          total: (debts[i] < Decimal.zero ? Decimal.zero : total),
+          isCompleted: (debts[i] < Decimal.zero)));
+    }
+
+    // Return modified credits
+    return payments;
+  }
+
+  /// Return currency formated with 2 decimal places and a locale currency symbol
   static String formatCurrency(BuildContext context, dynamic value) {
     final locale = Localizations.localeOf(context);
     final currencySymbol =
@@ -43,8 +110,9 @@ class FinancialTool {
     return "$currencySymbol ${value.toStringAsFixed(2)}";
   }
 
-  static PaymentList updatePayments(
-      PaymentList payments, CreditCard creditCard) {
+  /// Update all installments due dates based on creditCard due
+  static List<Payment> updatePayments(
+      List<Payment> payments, CreditCard creditCard) {
     final dayDue = creditCard.due ?? 1;
     // Calculate datetime
     int monthOffset = 0;
@@ -54,7 +122,8 @@ class FinancialTool {
         .toList();
   }
 
-  static PaymentList generatePaymentsDues(PaymentList payments,
+  /// Generate due dates for payments
+  static List<Payment> generatePaymentsDues(List<Payment> payments,
       [DateTime? initial]) {
     final now = initial ?? DateTime.now();
     int monthOffset = 0;
@@ -64,6 +133,7 @@ class FinancialTool {
         .toList();
   }
 
+  // Calculate total debt (Sum of all credits)
   static Decimal totalDebt(List<Credit?> credits) {
     if (credits.isEmpty) return Decimal.zero;
     Decimal totalDebt = Decimal.zero;
@@ -73,6 +143,7 @@ class FinancialTool {
     return totalDebt;
   }
 
+  // Calculate month total from all Credits
   static Decimal monthInstallments(List<Credit?> credits) {
     final now = DateTime.now();
     Decimal total = Decimal.zero;

@@ -27,7 +27,10 @@
 		"interest_ma": "Interest (% M.A)",
 		"term": "Installments",
 		"others": "Other expenses",
-		"credit": "Crédito"
+		"credit": "Credit",
+		"deposit": "Deposit",
+		"expense": "Expense",
+		"paid": "Paid"
 	},
 	"models": {
 		"credit": {
@@ -54,9 +57,9 @@
 			"appbar_title": "Credit Simulator",
 			"bottom_item": "Credit"
 		},
-		"settings": {
-			"appbar_title": "Settings",
-			"bottom_item": "Settings"
+		"about": {
+			"appbar_title": "About",
+			"bottom_item": "About"
 		}
 	},
 	"screens": {
@@ -92,7 +95,9 @@
 			"initial_date": "Pick initial due"
 		},
 		"credit_detail": {
-			"page_title": "Credit Detail"
+			"page_title": "Credit Detail",
+			"tutorial": "The left switch indicated the installments you have already paid, you can manually check this option on and off to keep track of your installments. To add an additional deposit or expense click on top of the corresponding Installment",
+			"deposit_expenses": "Register Deposits & Expenses"
 		}
 	}
 }

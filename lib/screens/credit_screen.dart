@@ -246,7 +246,7 @@ class _SaveCreditState extends State<_SaveCredit> {
                         },
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            hintText: t.screens.credit.select_card),
+                            labelText: t.screens.credit.select_card),
                         items: snapshot.data!
                             .map((e) => DropdownMenuItem(
                                   value: e,

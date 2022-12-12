@@ -20,7 +20,7 @@ part 'application_database.g.dart';
   IconDataConverter,
   ColorConverter,
   FeeTypeConverter,
-  PaymentListConverter,
+  ListPaymentConverter,
   DecimalConverter
 ])
 @Database(version: 1, entities: [CreditCard, Credit])

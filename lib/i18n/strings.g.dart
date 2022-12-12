@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 1
-/// Strings: 60
+/// Strings: 65
 ///
-/// Built on 2022-12-11 at 05:28 UTC
+/// Built on 2022-12-12 at 03:13 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -203,7 +203,10 @@ class _StringsFinancialEn {
 	String get interest_ma => 'Interest (% M.A)';
 	String get term => 'Installments';
 	String get others => 'Other expenses';
-	String get credit => 'Crédito';
+	String get credit => 'Credit';
+	String get deposit => 'Deposit';
+	String get expense => 'Expense';
+	String get paid => 'Paid';
 }
 
 // Path: models
@@ -227,7 +230,7 @@ class _StringsNavigationEn {
 	// Translations
 	late final _StringsNavigationCardsEn cards = _StringsNavigationCardsEn._(_root);
 	late final _StringsNavigationCreditEn credit = _StringsNavigationCreditEn._(_root);
-	late final _StringsNavigationSettingsEn settings = _StringsNavigationSettingsEn._(_root);
+	late final _StringsNavigationAboutEn about = _StringsNavigationAboutEn._(_root);
 }
 
 // Path: screens
@@ -301,15 +304,15 @@ class _StringsNavigationCreditEn {
 	String get bottom_item => 'Credit';
 }
 
-// Path: navigation.settings
-class _StringsNavigationSettingsEn {
-	_StringsNavigationSettingsEn._(this._root);
+// Path: navigation.about
+class _StringsNavigationAboutEn {
+	_StringsNavigationAboutEn._(this._root);
 
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
-	String get appbar_title => 'Settings';
-	String get bottom_item => 'Settings';
+	String get appbar_title => 'About';
+	String get bottom_item => 'About';
 }
 
 // Path: screens.card_edit
@@ -379,6 +382,8 @@ class _StringsScreensCreditDetailEn {
 
 	// Translations
 	String get page_title => 'Credit Detail';
+	String get tutorial => 'The left switch indicated the installments you have already paid, you can manually check this option on and off to keep track of your installments. To add an additional deposit or expense click on top of the corresponding Installment';
+	String get deposit_expenses => 'Register Deposits & Expenses';
 }
 
 /// Flat map(s) containing all translations.
@@ -410,7 +415,10 @@ extension on _StringsEn {
 			case 'financial.interest_ma': return 'Interest (% M.A)';
 			case 'financial.term': return 'Installments';
 			case 'financial.others': return 'Other expenses';
-			case 'financial.credit': return 'Crédito';
+			case 'financial.credit': return 'Credit';
+			case 'financial.deposit': return 'Deposit';
+			case 'financial.expense': return 'Expense';
+			case 'financial.paid': return 'Paid';
 			case 'models.credit.name': return 'Credit name';
 			case 'models.payment.installment': return ({required Object number}) => 'Installment #${number}';
 			case 'models.credit_card.name': return 'Card name';
@@ -421,8 +429,8 @@ extension on _StringsEn {
 			case 'navigation.cards.bottom_item': return 'Cards';
 			case 'navigation.credit.appbar_title': return 'Credit Simulator';
 			case 'navigation.credit.bottom_item': return 'Credit';
-			case 'navigation.settings.appbar_title': return 'Settings';
-			case 'navigation.settings.bottom_item': return 'Settings';
+			case 'navigation.about.appbar_title': return 'About';
+			case 'navigation.about.bottom_item': return 'About';
 			case 'screens.card_edit.page_title': return 'Add a card';
 			case 'screens.card_edit.error_due_day': return 'Select a day between 1 and 31';
 			case 'screens.card_edit.error_card_name': return 'You must name your card';
@@ -447,6 +455,8 @@ extension on _StringsEn {
 			case 'screens.credit.select_card': return 'Select a card...';
 			case 'screens.credit.initial_date': return 'Pick initial due';
 			case 'screens.credit_detail.page_title': return 'Credit Detail';
+			case 'screens.credit_detail.tutorial': return 'The left switch indicated the installments you have already paid, you can manually check this option on and off to keep track of your installments. To add an additional deposit or expense click on top of the corresponding Installment';
+			case 'screens.credit_detail.deposit_expenses': return 'Register Deposits & Expenses';
 			default: return null;
 		}
 	}

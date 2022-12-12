@@ -195,7 +195,7 @@ class _$CreditCardDao extends CreditCardDao {
             loan: _decimalConverter.decode(row['loan'] as String),
             interest: _decimalConverter.decode(row['interest'] as String),
             installments: row['installments'] as int,
-            payments: _paymentListConverter.decode(row['payments'] as String)),
+            payments: _listPaymentConverter.decode(row['payments'] as String)),
         arguments: [name]);
   }
 
@@ -230,7 +230,7 @@ class _$CreditDao extends CreditDao {
                   'loan': _decimalConverter.encode(item.loan),
                   'interest': _decimalConverter.encode(item.interest),
                   'installments': item.installments,
-                  'payments': _paymentListConverter.encode(item.payments)
+                  'payments': _listPaymentConverter.encode(item.payments)
                 }),
         _creditUpdateAdapter = UpdateAdapter(
             database,
@@ -242,7 +242,7 @@ class _$CreditDao extends CreditDao {
                   'loan': _decimalConverter.encode(item.loan),
                   'interest': _decimalConverter.encode(item.interest),
                   'installments': item.installments,
-                  'payments': _paymentListConverter.encode(item.payments)
+                  'payments': _listPaymentConverter.encode(item.payments)
                 }),
         _creditDeletionAdapter = DeletionAdapter(
             database,
@@ -254,7 +254,7 @@ class _$CreditDao extends CreditDao {
                   'loan': _decimalConverter.encode(item.loan),
                   'interest': _decimalConverter.encode(item.interest),
                   'installments': item.installments,
-                  'payments': _paymentListConverter.encode(item.payments)
+                  'payments': _listPaymentConverter.encode(item.payments)
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -278,7 +278,7 @@ class _$CreditDao extends CreditDao {
             loan: _decimalConverter.decode(row['loan'] as String),
             interest: _decimalConverter.decode(row['interest'] as String),
             installments: row['installments'] as int,
-            payments: _paymentListConverter.decode(row['payments'] as String)));
+            payments: _listPaymentConverter.decode(row['payments'] as String)));
   }
 
   @override
@@ -290,7 +290,7 @@ class _$CreditDao extends CreditDao {
             loan: _decimalConverter.decode(row['loan'] as String),
             interest: _decimalConverter.decode(row['interest'] as String),
             installments: row['installments'] as int,
-            payments: _paymentListConverter.decode(row['payments'] as String)),
+            payments: _listPaymentConverter.decode(row['payments'] as String)),
         arguments: [name]);
   }
 
@@ -315,5 +315,5 @@ final _dateTimeConverter = DateTimeConverter();
 final _iconDataConverter = IconDataConverter();
 final _colorConverter = ColorConverter();
 final _feeTypeConverter = FeeTypeConverter();
-final _paymentListConverter = PaymentListConverter();
+final _listPaymentConverter = ListPaymentConverter();
 final _decimalConverter = DecimalConverter();

@@ -35,18 +35,29 @@ class CreditDetailScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            Card(
-              child: AbsorbPointer(child: CreditWidget(credit: credit)),
-            ),
-            CreditInstallmentsWidget(
-              credit: credit,
-              additionalButtons: true,
-            )
-          ],
-        ),
+        children: [
+          Card(
+            child: AbsorbPointer(child: CreditWidget(credit: credit)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text.rich(TextSpan(children: [
+              const WidgetSpan(
+                  child: Padding(
+                padding: EdgeInsets.only(bottom: 16.0),
+                child: Icon(Icons.info),
+              )),
+              TextSpan(
+                text: "\n${t.screens.credit_detail.tutorial}",
+              )
+            ])),
+          ),
+          CreditInstallmentsWidget(
+            credit: credit,
+            additionalOptions: true,
+          )
+        ],
       ));
 }

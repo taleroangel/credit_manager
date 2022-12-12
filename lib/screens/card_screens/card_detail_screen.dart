@@ -2,7 +2,7 @@ import 'package:credit_manager/i18n/strings.g.dart';
 import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/providers/credit_card_provider.dart';
 import 'package:credit_manager/providers/credit_provider.dart';
-import 'package:credit_manager/screens/cards/edit_card_screen.dart';
+import 'package:credit_manager/screens/card_screens/edit_card_screen.dart';
 import 'package:credit_manager/tools/financial_tool.dart';
 import 'package:credit_manager/widgets/dialogs/erase_confirmation_dialog.dart';
 import 'package:credit_manager/widgets/dialogs/error_dialog.dart';
@@ -20,7 +20,7 @@ class CardDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // CardsProvider for getting Card information
     final cardsProvider = context.watch<CreditCardProvider>();
-
+    context.watch<CreditProvider>(); // Watch for credit changes
     // Build widget
     return Scaffold(
       appBar: AppBar(title: Text(t.screens.card_details.page_title)),
@@ -154,8 +154,8 @@ class CardDetailScreen extends StatelessWidget {
 
   void deleteCardAndCredits(BuildContext context) async {
     // Get Providers
-    final creditCardProvider = context.read<CreditCardProvider>();
-    final creditProvider = context.read<CreditProvider>();
+    final creditCardProvider = context.watch<CreditCardProvider>();
+    final creditProvider = context.watch<CreditProvider>();
 
     try {
       // Delete all credtis

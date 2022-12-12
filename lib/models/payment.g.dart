@@ -14,10 +14,11 @@ _$_Payment _$$_PaymentFromJson(Map<String, dynamic> json) => _$_Payment(
       others: json['others'] == null
           ? null
           : Decimal.fromJson(json['others'] as String),
-      isPaid: json['isPaid'] as bool? ?? false,
-      payment: json['payment'] == null
+      deposit: json['deposit'] == null
           ? null
-          : Decimal.fromJson(json['payment'] as String),
+          : Decimal.fromJson(json['deposit'] as String),
+      isPaid: json['isPaid'] as bool? ?? false,
+      isCompleted: json['isCompleted'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_PaymentToJson(_$_Payment instance) =>
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$_PaymentToJson(_$_Payment instance) =>
       'interest': instance.interest,
       'total': instance.total,
       'others': instance.others,
+      'deposit': instance.deposit,
       'isPaid': instance.isPaid,
-      'payment': instance.payment,
+      'isCompleted': instance.isCompleted,
     };

@@ -21,8 +21,10 @@ class CardField extends StatefulWidget {
 class _CardFieldState extends State<CardField> {
   @override
   Widget build(BuildContext context) {
+    // Watch for credit card changes
     final card = context.watch<CreditCard>();
     Color pickerColor = card.color;
+
     return ListView(
       padding: const EdgeInsets.all(28.0),
       children: [

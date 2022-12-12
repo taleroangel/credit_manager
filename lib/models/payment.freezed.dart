@@ -20,13 +20,21 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Payment {
-  DateTime? get due => throw _privateConstructorUsedError;
-  Decimal get debt => throw _privateConstructorUsedError;
-  Decimal get interest => throw _privateConstructorUsedError;
-  Decimal get total => throw _privateConstructorUsedError;
-  Decimal? get others => throw _privateConstructorUsedError;
-  bool get isPaid => throw _privateConstructorUsedError;
-  Decimal? get payment => throw _privateConstructorUsedError;
+  DateTime? get due =>
+      throw _privateConstructorUsedError; // Payment due DateTime
+  Decimal get debt =>
+      throw _privateConstructorUsedError; // Total debt in installment
+  Decimal get interest =>
+      throw _privateConstructorUsedError; // Interest in M.A %
+  Decimal get total =>
+      throw _privateConstructorUsedError; // Total for this installment
+  Decimal? get others =>
+      throw _privateConstructorUsedError; // Any other expenses that add to the total
+  Decimal? get deposit =>
+      throw _privateConstructorUsedError; // Additional payment (Reduces debt)
+  bool get isPaid =>
+      throw _privateConstructorUsedError; // This installment was paid
+  bool get isCompleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,8 +52,9 @@ abstract class $PaymentCopyWith<$Res> {
       Decimal interest,
       Decimal total,
       Decimal? others,
+      Decimal? deposit,
       bool isPaid,
-      Decimal? payment});
+      bool isCompleted});
 }
 
 /// @nodoc
@@ -66,8 +75,9 @@ class _$PaymentCopyWithImpl<$Res, $Val extends Payment>
     Object? interest = null,
     Object? total = null,
     Object? others = freezed,
+    Object? deposit = freezed,
     Object? isPaid = null,
-    Object? payment = freezed,
+    Object? isCompleted = null,
   }) {
     return _then(_value.copyWith(
       due: freezed == due
@@ -90,14 +100,18 @@ class _$PaymentCopyWithImpl<$Res, $Val extends Payment>
           ? _value.others
           : others // ignore: cast_nullable_to_non_nullable
               as Decimal?,
+      deposit: freezed == deposit
+          ? _value.deposit
+          : deposit // ignore: cast_nullable_to_non_nullable
+              as Decimal?,
       isPaid: null == isPaid
           ? _value.isPaid
           : isPaid // ignore: cast_nullable_to_non_nullable
               as bool,
-      payment: freezed == payment
-          ? _value.payment
-          : payment // ignore: cast_nullable_to_non_nullable
-              as Decimal?,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -115,8 +129,9 @@ abstract class _$$_PaymentCopyWith<$Res> implements $PaymentCopyWith<$Res> {
       Decimal interest,
       Decimal total,
       Decimal? others,
+      Decimal? deposit,
       bool isPaid,
-      Decimal? payment});
+      bool isCompleted});
 }
 
 /// @nodoc
@@ -134,8 +149,9 @@ class __$$_PaymentCopyWithImpl<$Res>
     Object? interest = null,
     Object? total = null,
     Object? others = freezed,
+    Object? deposit = freezed,
     Object? isPaid = null,
-    Object? payment = freezed,
+    Object? isCompleted = null,
   }) {
     return _then(_$_Payment(
       due: freezed == due
@@ -158,14 +174,18 @@ class __$$_PaymentCopyWithImpl<$Res>
           ? _value.others
           : others // ignore: cast_nullable_to_non_nullable
               as Decimal?,
+      deposit: freezed == deposit
+          ? _value.deposit
+          : deposit // ignore: cast_nullable_to_non_nullable
+              as Decimal?,
       isPaid: null == isPaid
           ? _value.isPaid
           : isPaid // ignore: cast_nullable_to_non_nullable
               as bool,
-      payment: freezed == payment
-          ? _value.payment
-          : payment // ignore: cast_nullable_to_non_nullable
-              as Decimal?,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -179,31 +199,42 @@ class _$_Payment implements _Payment {
       required this.interest,
       required this.total,
       this.others,
+      this.deposit,
       this.isPaid = false,
-      this.payment});
+      this.isCompleted = false});
 
   factory _$_Payment.fromJson(Map<String, dynamic> json) =>
       _$$_PaymentFromJson(json);
 
   @override
   final DateTime? due;
+// Payment due DateTime
   @override
   final Decimal debt;
+// Total debt in installment
   @override
   final Decimal interest;
+// Interest in M.A %
   @override
   final Decimal total;
+// Total for this installment
   @override
   final Decimal? others;
+// Any other expenses that add to the total
+  @override
+  final Decimal? deposit;
+// Additional payment (Reduces debt)
   @override
   @JsonKey()
   final bool isPaid;
+// This installment was paid
   @override
-  final Decimal? payment;
+  @JsonKey()
+  final bool isCompleted;
 
   @override
   String toString() {
-    return 'Payment(due: $due, debt: $debt, interest: $interest, total: $total, others: $others, isPaid: $isPaid, payment: $payment)';
+    return 'Payment(due: $due, debt: $debt, interest: $interest, total: $total, others: $others, deposit: $deposit, isPaid: $isPaid, isCompleted: $isCompleted)';
   }
 
   @override
@@ -217,14 +248,16 @@ class _$_Payment implements _Payment {
                 other.interest == interest) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.others, others) || other.others == others) &&
+            (identical(other.deposit, deposit) || other.deposit == deposit) &&
             (identical(other.isPaid, isPaid) || other.isPaid == isPaid) &&
-            (identical(other.payment, payment) || other.payment == payment));
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, due, debt, interest, total, others, isPaid, payment);
+  int get hashCode => Object.hash(runtimeType, due, debt, interest, total,
+      others, deposit, isPaid, isCompleted);
 
   @JsonKey(ignore: true)
   @override
@@ -247,25 +280,28 @@ abstract class _Payment implements Payment {
       required final Decimal interest,
       required final Decimal total,
       final Decimal? others,
+      final Decimal? deposit,
       final bool isPaid,
-      final Decimal? payment}) = _$_Payment;
+      final bool isCompleted}) = _$_Payment;
 
   factory _Payment.fromJson(Map<String, dynamic> json) = _$_Payment.fromJson;
 
   @override
   DateTime? get due;
-  @override
+  @override // Payment due DateTime
   Decimal get debt;
-  @override
+  @override // Total debt in installment
   Decimal get interest;
-  @override
+  @override // Interest in M.A %
   Decimal get total;
-  @override
+  @override // Total for this installment
   Decimal? get others;
-  @override
+  @override // Any other expenses that add to the total
+  Decimal? get deposit;
+  @override // Additional payment (Reduces debt)
   bool get isPaid;
-  @override
-  Decimal? get payment;
+  @override // This installment was paid
+  bool get isCompleted;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentCopyWith<_$_Payment> get copyWith =>
