@@ -1,3 +1,5 @@
+*.sksl.json
+
 # Miscellaneous
 *.class
 *.log

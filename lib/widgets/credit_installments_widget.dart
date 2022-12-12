@@ -70,38 +70,41 @@ class _ListItemState extends State<_ListItem> {
     final formatter = DateFormat.yMd(locale.toString());
 
     return ListTile(
-      onTap: () async {
-        final retval = await showDialog(
-            context: context,
-            builder: (_) => _PaymentDeposit(
-                  payment: widget.credit.payments[widget.i],
-                ));
-        if (retval != null) {
-          // Update values
-          widget.credit.payments[widget.i] = widget.credit.payments[widget.i]
-              .copyWith(deposit: retval['deposit'], others: retval['expense']);
+      onTap: widget.additionalButtons
+          ? () async {
+              final retval = await showDialog(
+                  context: context,
+                  builder: (_) => _PaymentDeposit(
+                        payment: widget.credit.payments[widget.i],
+                      ));
+              if (retval != null) {
+                // Update values
+                widget.credit.payments[widget.i] =
+                    widget.credit.payments[widget.i].copyWith(
+                        deposit: retval['deposit'], others: retval['expense']);
 
-          // Recalculate the credit
-          widget.credit.payments =
-              FinancialTool.recalculateCredit(widget.credit);
+                // Recalculate the credit
+                widget.credit.payments =
+                    FinancialTool.recalculateCredit(widget.credit);
 
-          // Update the credit
-          creditProvider
-              .update(widget.credit)
-              // Is insertion was successfull
-              .then((value) => showDialog(
-                    context: context,
-                    builder: (_) => const SuccessDialog(),
-                  ))
-              // If insertion failed
-              .onError((error, stackTrace) => showDialog(
-                    context: context,
-                    builder: (context) => ErrorDialog(
-                      reason: error.toString(),
-                    ),
-                  ));
-        }
-      },
+                // Update the credit
+                creditProvider
+                    .update(widget.credit)
+                    // Is insertion was successfull
+                    .then((value) => showDialog(
+                          context: context,
+                          builder: (_) => const SuccessDialog(),
+                        ))
+                    // If insertion failed
+                    .onError((error, stackTrace) => showDialog(
+                          context: context,
+                          builder: (context) => ErrorDialog(
+                            reason: error.toString(),
+                          ),
+                        ));
+              }
+            }
+          : null,
       leading: widget.additionalButtons
           ? Wrap(
               direction: Axis.vertical,
