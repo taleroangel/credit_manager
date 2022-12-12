@@ -1,5 +1,5 @@
 name: credit_manager
-description: A new Flutter project.
+description: A simple application for simulating credits and keeping track of your credit cards.
 
 publish_to: "none"
 version: 1.0.0+1
