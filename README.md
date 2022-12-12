@@ -1,6 +1,5 @@
 # credit_manager
-
-A new Flutter project.
+Simple application for simulating credits and keeping track of your credit cards.
 
 ## Getting Started
 

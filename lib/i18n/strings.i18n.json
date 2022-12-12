@@ -10,7 +10,8 @@
 		"invalid": "This value is not valid",
 		"required": "This field is required",
 		"optional": "(Optional)",
-		"save": "Save"
+		"save": "Save",
+		"licenses": "Software Licenses"
 	},
 	"dialogs": {
 		"success_title": "Successfull Operation",
