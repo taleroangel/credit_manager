@@ -1,13 +1,29 @@
 import 'package:credit_manager/models/credit.dart';
 import 'package:credit_manager/models/credit_card.dart';
 import 'package:credit_manager/models/payment.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class FinancialTool {
   // Rational numbers like (10/3) infinite decimal precision scale
   static const rationalInfinitePrecisionScale = 5;
+
+  static final CurrencyFormatterSettings currencyFormatterEN =
+      CurrencyFormatterSettings(
+          symbol: '\$',
+          symbolSide: SymbolSide.left,
+          thousandSeparator: ',',
+          decimalSeparator: '.',
+          symbolSeparator: ' ');
+
+  static final CurrencyFormatterSettings currencyFormatterES =
+      CurrencyFormatterSettings(
+          symbol: '\$',
+          symbolSide: SymbolSide.left,
+          thousandSeparator: ',',
+          decimalSeparator: '.',
+          symbolSeparator: ' ');
 
   /// Calculate a credit and return the corresponding [List<Payment>] (Installments)
   static List<Payment> calculateCredit(
@@ -104,10 +120,11 @@ class FinancialTool {
 
   /// Return currency formated with 2 decimal places and a locale currency symbol
   static String formatCurrency(BuildContext context, dynamic value) {
-    final locale = Localizations.localeOf(context);
-    final currencySymbol =
-        NumberFormat.simpleCurrency(locale: locale.toString()).currencySymbol;
-    return "$currencySymbol ${value.toStringAsFixed(2)}";
+    return CurrencyFormatter.format(
+        value,
+        Localizations.localeOf(context).toString() == "ES"
+            ? currencyFormatterES
+            : currencyFormatterEN);
   }
 
   /// Update all installments due dates based on creditCard due

@@ -1,1 +1,106 @@
-{}
+{
+	"app": {
+		"title": "Gestor de Créditos",
+		"legal": "Este es un software de Código abiertno y se provee a través de una licencia GNU GENERAL PUBLIC LICENSE v3",
+		"accept": "Aceptar",
+		"cancel": "Cancelar",
+		"add": "Añadir",
+		"edit": "Editar",
+		"erase": "Borrar",
+		"update": "Actualizar",
+		"invalid": "Este valor no es válido",
+		"required": "Este campo es requerido",
+		"optional": "(Opcional)",
+		"save": "Guardar",
+		"licenses": "Licencias de Software",
+		"github": "Contribuir en GitHub"
+	},
+	"dialogs": {
+		"success_title": "Operación exitosa",
+		"success_subtitle": "Insersión realizada con éxito",
+		"error_title": "Ha ocurrido un error",
+		"error_subtitle": "Error reportado por la base de datos: ",
+		"error_unspecified": "No hay información relevante"
+	},
+	"financial": {
+		"fee": "Tarifa",
+		"due": "Día de pago",
+		"loan": "Préstamo",
+		"interest_loss": "Pérdida en intereses",
+		"interest_ma": "Interés (% M.V)",
+		"term": "Cuotas",
+		"others": "Otros costos",
+		"credit": "Credito",
+		"deposit": "Abonos a capital",
+		"expense": "Cobro adicional",
+		"paid": "Pagado"
+	},
+	"models": {
+		"credit": {
+			"name": "Nombre del crédito"
+		},
+		"payment": {
+			"installment": "Cuota #$number"
+		},
+		"credit_card": {
+			"name": "Nombre de la tarjeta",
+			"fee_type": [
+				"Ninguno",
+				"Mensual fija",
+				"Mensual con uso"
+			]
+		}
+	},
+	"navigation": {
+		"cards": {
+			"appbar_title": "Tarjetas de Crédito",
+			"bottom_item": "Tarjetas"
+		},
+		"credit": {
+			"appbar_title": "Simulador de Crédito",
+			"bottom_item": "Crédito"
+		},
+		"about": {
+			"appbar_title": "Acerca de",
+			"bottom_item": "Acerca de"
+		}
+	},
+	"screens": {
+		"card_edit": {
+			"page_title": "Agregar una tarjeta",
+			"error_due_day": "Debes seleccionar un día entre 1 y 31",
+			"error_card_name": "Debes nombrar tu tarjeta",
+			"info_card_name": "No podrás cambiar el nombre luego",
+			"color_picker_title": "Selecciona un color",
+			"color_pick": "Color",
+			"icon_pick": "Icono",
+			"icon_picker_title": "Selecciona un icono"
+		},
+		"card_details": {
+			"page_title": "Detalles de la tarjeta",
+			"delete_confirmation": "¿Estás seguro que deseas eliminar la tarjeta $cardName?",
+			"next_payment": "Tur próximo pago es de: $payment",
+			"total_debt": "Deuda total: $debt",
+			"no_payment": "No hay pagos pendientes",
+			"no_credits": "Parece ser que no has añadido ningun crédito",
+			"your_credits": "Tus créditos: "
+		},
+		"cards": {
+			"no_cards": "Parece ser que no has añadido ninguna tarjeta"
+		},
+		"credit": {
+			"page_title": "Resumen del crédito",
+			"calculate": "Calcular",
+			"total": "Total: ",
+			"max_installment": "Cuota máxima: ",
+			"store_on_credit_card": "Guardar en tarjeta",
+			"select_card": "Seleccione una tarjeta...",
+			"initial_date": "Escoger fecha inicial"
+		},
+		"credit_detail": {
+			"page_title": "Detalles del Crédito",
+			"tutorial": "El interruptor de la izquierda indica las cuotas que ya has pagado, puedes activarlo o desactivarlo manualmente para hacer seguimiento a las cuotas que pagues. Para añadir un abono o costo adicional oprime encima de la cuota correspondiente",
+			"deposit_expenses": "Registrar abonos y cobros"
+		}
+	}
+}

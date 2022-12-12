@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <g transform="matrix(1, 0, 0, 1, 0.000002, 82.471001)">
+    <title>CreditCard</title>
+    <g>
+      <title>Frame</title>
+      <rect x="22.484" y="24.089" width="455.032" height="286.88" rx="30" ry="30" style="stroke-width: 10px; fill: rgb(56, 106, 32);">
+        <title>Frame</title>
+      </rect>
+      <rect x="36.703" y="70.129" width="455" height="56.745" style="stroke-width: 8px; fill: rgb(217, 231, 203);" transform="matrix(0.999997, 0.002451, -0.002451, 0.999997, -13.960769, 7.479331)">
+        <title>Band</title>
+      </rect>
+    </g>
+    <g>
+      <title>Names</title>
+      <rect x="62.634" y="250.536" width="139.722" height="27.837" rx="15" ry="15" style="fill: rgb(156, 214, 126);">
+        <title>Left</title>
+      </rect>
+      <rect x="210.118" y="250.536" width="64.776" height="27.837" rx="15" ry="15" style="fill: rgb(156, 214, 126);">
+        <title>Right</title>
+      </rect>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 4.282655, 3.211991)">
+      <title>Company</title>
+      <ellipse style="fill: rgb(156, 214, 126);" cx="349.571" cy="226.981" rx="44.968" ry="44.968">
+        <title>LeftRing</title>
+      </ellipse>
+      <ellipse style="fill: rgb(217, 231, 203);" cx="389.722" cy="226.981" rx="44.968" ry="44.968">
+        <title>RightRing</title>
+      </ellipse>
+    </g>
+  </g>
+</svg>

@@ -1,5 +1,6 @@
 name: credit_manager
 description: A simple application for simulating credits and keeping track of your credit cards.
+repository: https://github.com/taleroangel/credit_manager
 
 publish_to: "none"
 version: 1.0.0+1
@@ -25,7 +26,9 @@ dependencies:
   freezed_annotation: ^2.2.0
   decimal: ^2.3.2
   intl: ^0.17.0
-  package_info_plus: ^0.0.1
+  package_info_plus: ^3.0.2
+  url_launcher: ^6.1.7
+  currency_formatter: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -37,11 +40,23 @@ dev_dependencies:
   slang_build_runner: ^3.5.0
   freezed: ^2.2.0
   json_serializable: ^6.5.4
+  flutter_launcher_icons: ^0.11.0
 
 flutter:
   generate: true
   uses-material-design: true
 
+  assets:
+    - assets/icons/icon.png
+
 flutter_native_splash:
+  image: assets/icons/icon.png
   color: "#ffffff"
+  image_dark: assets/icons/icon.png
   color_dark: "#000000"
+
+flutter_icons:
+  image_path: assets/icons/icon.png
+  adaptive_icon_foreground: assets/icons/icon_padding.png
+  adaptive_icon_background: "#081800"
+  android: true

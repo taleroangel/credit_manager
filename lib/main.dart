@@ -45,6 +45,7 @@ class Application extends StatelessWidget {
             future: GetIt.instance.allReady(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                // Remove the splash screen
                 FlutterNativeSplash.remove();
                 // Material Application
                 return MultiProvider(
@@ -90,8 +91,6 @@ class MainView extends StatefulWidget {
   @override
   State<MainView> createState() => _MainViewState();
 }
-
-//TODO: Enable Settings
 
 class _MainViewState extends State<MainView> {
   int _currentIndex = 0;

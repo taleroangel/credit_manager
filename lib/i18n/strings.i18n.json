@@ -1,6 +1,7 @@
 {
 	"app": {
 		"title": "Credit Manager",
+		"legal": "This software is Open Source and provided throught the GNU GENERAL PUBLIC LICENSE v3",
 		"accept": "Ok",
 		"cancel": "Cancel",
 		"add": "Add",
@@ -11,7 +12,8 @@
 		"required": "This field is required",
 		"optional": "(Optional)",
 		"save": "Save",
-		"licenses": "Software Licenses"
+		"licenses": "Software Licenses",
+		"github": "Contribute on GitHub"
 	},
 	"dialogs": {
 		"success_title": "Successfull Operation",
@@ -97,7 +99,7 @@
 		},
 		"credit_detail": {
 			"page_title": "Credit Detail",
-			"tutorial": "The left switch indicated the installments you have already paid, you can manually check this option on and off to keep track of your installments. To add an additional deposit or expense click on top of the corresponding Installment",
+			"tutorial": "The left switch indicates the installments you have already paid, you can manually check this option on and off to keep track of your installments. To add an additional deposit or expense click on top of the corresponding Installment",
 			"deposit_expenses": "Register Deposits & Expenses"
 		}
 	}

@@ -154,8 +154,8 @@ class CardDetailScreen extends StatelessWidget {
 
   void deleteCardAndCredits(BuildContext context) async {
     // Get Providers
-    final creditCardProvider = context.watch<CreditCardProvider>();
-    final creditProvider = context.watch<CreditProvider>();
+    final creditProvider = context.read<CreditProvider>();
+    final creditCardProvider = context.read<CreditCardProvider>();
 
     try {
       // Delete all credtis
