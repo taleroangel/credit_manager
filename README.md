@@ -2,14 +2,17 @@
 
 Simple Flutter application for simulating credits and keeping track of your credit cards.
 
-Available in English and Spanish
+<a href="#"><img width="200px" src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png"/></a>
 
-|                                       |                                       |                                         |
-| ------------------------------------- | ------------------------------------- | --------------------------------------- |
-| ![](docs/screenshots/cards.jpg)       | ![](docs/screenshots/credit.jpg)      | ![](docs/screenshots/about.jpg)         |
-| ![](docs/screenshots/card_detail.jpg) | ![](docs/screenshots/save_credit.jpg) | ![](docs/screenshots/credit_detail.jpg) |
+|                                                  |                                            |                                              |
+| ------------------------------------------------ | ------------------------------------------ | -------------------------------------------- |
+| ![](docs/screenshots/16_9/cards.jpg)             | ![](docs/screenshots/16_9/credit.jpg)      | ![](docs/screenshots/16_9/about.jpg)         |
+| ![](docs/screenshots/16_9/credit_simulation.jpg) | ![](docs/screenshots/16_9/card_detail.jpg) | ![](docs/screenshots/16_9/credit_detail.jpg) |
 
-## Compilation
+🌎️ Available in English and Spanish
+
+
+## 🏗️ Compilation
 The project is only available in 'Android' though no specific Android libraries where used so it may work in 'iOS' but I have no way of testing it.
 
 In order to compile it you need to run the code generations:
@@ -36,4 +39,3 @@ use the app and open all of it's screens and then press 'M', this will generate 
 Now creating a _Release APK_ is done by using the following command:
 
 	flutter build apk --obfuscate --split-debug-info=build/app/output/symbols --no-track-widget-creation --release --bundle-sksl-path flutter_01.sksl.json --no-tree-shake-icons -v
-
